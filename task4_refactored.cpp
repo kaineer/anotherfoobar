@@ -1,4 +1,5 @@
 // TODO: Still need to check `const`-s
+// TODO: Forgot to add MediaPlayer::Application#{addAdapter, setCurrentAdapter}
 
 // Somewhere in fmod.h, for example
 namespace FMOD
