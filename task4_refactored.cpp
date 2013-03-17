@@ -3,6 +3,36 @@
 // DONE: Base::SoundAdapter
 // TODO: copy FMOD::{Sound, SoundCard}
 // TODO: FMOD::SoundContainer, FMOD::SoundAdapter
+
+// Somewhere in fmod.h, for example
+namespace FMOD
+{
+  class Sound
+  {
+  //Класс для хранения звукового потока
+  public:
+    //загрузить звук из файла
+    Sound(const std::string& filename);
+
+    //скорость потока
+    double bitrate() const;
+
+    //полезные методы
+    ...
+  };
+
+  class SoundCard
+  {
+    //Класс для работы со звуковой картой
+    public:
+    //полезные методы
+    ...
+    //воспроизвести звуковой поток через звуковую карту
+    void Play(FMOD::Sound* sound);
+  };
+}
+// end of fmod.h
+
 namespace Base
 {
   class SoundContainer
@@ -22,7 +52,7 @@ namespace Base
 
     // Другие полезные функции
   };
-};
+}
 
 
 
