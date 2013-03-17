@@ -1,8 +1,9 @@
 // DONE: Base
 // DONE: Base::SoundContainer
 // DONE: Base::SoundAdapter
-// TODO: copy FMOD::{Sound, SoundCard}
-// TODO: FMOD::SoundContainer, FMOD::SoundAdapter
+// DONE: copy FMOD::{Sound, SoundCard}
+// DONE: FMOD::SoundContainer
+// TODO: FMOD::SoundAdapter
 
 // Somewhere in fmod.h, for example
 namespace FMOD
@@ -54,7 +55,29 @@ namespace Base
   };
 }
 
+namespace FMOD
+{
+  class SoundContainer
+  {
+  public:
+    SoundContainer(const std::string& filename)
+    {
+      sound = FMOD::Sound(filename);
+    }
 
+    ~SoundContainer()
+    {
+      delete sound;
+    }
+
+    FMOD::Sound* getSound() const { return sound; }
+
+  private:
+    FMOD::Sound* sound;
+  };
+
+  // TODO: FMOD::SoundAdapter
+}
 
 namespace MediaPlayer
 {
