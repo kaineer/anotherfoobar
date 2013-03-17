@@ -48,7 +48,7 @@ namespace Base
     virtual SoundContainer* Open(const std::string& filename) = 0;
     virtual void Play(const Base::SoundContainer* container) = 0;
 
-    virtual double bitrate() const = 0;
+    virtual double bitrate(const Base::SoundContainer* container) const = 0;
 
     // Другие полезные функции
   };
@@ -88,7 +88,7 @@ namespace FMOD
       delete soundCard;
     }
 
-    virtual void Close(const Base::SoundContainer* container)
+    void Close(const Base::SoundContainer* container)
     {
       // Метод вполне можно перенести в Base::SoundAdapter
       // а остальные действия поместить в деструктор
@@ -96,7 +96,7 @@ namespace FMOD
       delete container;
     }
 
-    virtual SoundContainer* Open(const std::string& filename)
+    SoundContainer* Open(const std::string& filename)
     {
       // А вот это уже никуда не перенести
       FMOD::SoundContainer* container = new FMOD::SoundContainer(filename);
@@ -104,14 +104,15 @@ namespace FMOD
     }
 
     // Воспроизведение звука
-    virtual void Play(const Base::SoundContainer* container)
+    void Play(const Base::SoundContainer* container)
     {
       const FMOD::Sound* sound = container->getSound();
       soundCard->Play(sound);
     }
 
-    virtual double bitrate() const
+    double bitrate(const Base::SoundContainer* _container) const
     {
+      const FMOD::SoundContainer* container = (FMOD::SoundContainer*)_container;
       const FMOD::Sound* sound = container->getSound();
       return sound->bitrate();
     }
@@ -158,6 +159,11 @@ namespace MediaPlayer
     void Play()
     {
       adapter->Play(container);
+    }
+
+    double bitrate() const
+    {
+      return adapter->bitrate(container);
     }
 
     // Возможно, что здесь методов больше и не понадобится
