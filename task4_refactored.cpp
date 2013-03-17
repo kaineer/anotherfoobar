@@ -1,9 +1,4 @@
-// DONE: Base
-// DONE: Base::SoundContainer
-// DONE: Base::SoundAdapter
-// DONE: copy FMOD::{Sound, SoundCard}
-// DONE: FMOD::SoundContainer
-// TODO: FMOD::SoundAdapter
+// TODO: Still need to check `const`-s
 
 // Somewhere in fmod.h, for example
 namespace FMOD
