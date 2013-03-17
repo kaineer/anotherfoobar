@@ -1,8 +1,8 @@
-// TODO: Base
-// TODO: Base::SoundContainer
-// TODO: Base::SoundAdapter
+// DONE: Base
+// DONE: Base::SoundContainer
+// DONE: Base::SoundAdapter
 // TODO: copy FMOD::{Sound, SoundCard}
-// TODO: FMOD::SoundAdapter
+// TODO: FMOD::SoundContainer, FMOD::SoundAdapter
 namespace Base
 {
   class SoundContainer
@@ -19,8 +19,12 @@ namespace Base
     virtual void Close(const Base::SoundContainer* container) = 0;
     virtual SoundContainer* Open(const std::string& filename) = 0;
     virtual void Play(const Base::SoundContainer* container) = 0;
+
+    // Другие полезные функции
   };
 };
+
+
 
 namespace MediaPlayer
 {
