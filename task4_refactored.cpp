@@ -1,3 +1,9 @@
+// TODO: Base
+// TODO: Base::SoundContainer
+// TODO: Base::SoundAdapter
+// TODO: copy FMOD::{Sound, SoundCard}
+// TODO: FMOD::SoundAdapter
+
 namespace MediaPlayer
 {
   class Item
