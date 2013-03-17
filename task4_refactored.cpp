@@ -1,5 +1,4 @@
 // TODO: Still need to check `const`-s
-// TODO: Forgot to add MediaPlayer::Application#{addAdapter, setCurrentAdapter}
 
 // Somewhere in fmod.h, for example
 namespace FMOD
@@ -186,6 +185,23 @@ namespace MediaPlayer
         it != adapters.end(); ++it) {
         delete *it;
       }
+    }
+
+    // Добавляем связку приложения со звуковой картой
+    void addAdapter(Base::SoundAdapter* _adapter)
+    {
+      adapters.push_back(_adapter);
+    }
+
+    // Выбираем текущую связку со звуковой картой
+    void setCurrentAdapter(Base::SoundAdapter* _adapter)
+    {
+      for(std::list<MediaPlayer::Item*>::iterator it = playlist.begin();
+        it != playlist.end(); ++it) {
+        (*it)->setSoundAdapter(_adapter);
+      }
+
+      adapter = _adapter;
     }
 
     // Добавление элемента списка проигрывания в плеер
