@@ -3,13 +3,40 @@
 // TODO: Base::SoundAdapter
 // TODO: copy FMOD::{Sound, SoundCard}
 // TODO: FMOD::SoundAdapter
+namespace Base
+{
+  class SoundContainer
+  {
+  public:
+    SoundContainer() {}
+  };
+
+  class SoundAdapter
+  {
+  public:
+    SoundAdapter() {}
+
+    virtual void Close(const Base::SoundContainer* container) = 0;
+    virtual SoundContainer* Open(const std::string& filename) = 0;
+    virtual void Play(const Base::SoundContainer* container) = 0;
+  };
+};
 
 namespace MediaPlayer
 {
   class Item
   {
   public:
-    Item(const std::string& _filename): filename(_filename) {}
+    Item(const std::string& _filename):
+      filename(_filename), adapter(0), container(0) {}
+
+    ~Item()
+    {
+      if(adapter && container)
+      {
+        adapter->Close(container);
+      }
+    }
 
     void setSoundAdapter(const Base::SoundAdapter* _adapter)
     {
