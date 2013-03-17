@@ -1,5 +1,40 @@
 namespace MediaPlayer
 {
+  class Item
+  {
+  public:
+    Item(const std::string& _filename): filename(_filename) {}
+
+    void setSoundAdapter(const Base::SoundAdapter* _adapter)
+    {
+      if(adapter)
+      {
+        adapter->Close(container);
+        container = 0;
+      }
+
+      adapter = _adapter;
+
+      if(adapter)
+      {
+        container = adapter->Open(filename);
+      }
+    }
+
+    void Play()
+    {
+      adapter->Play(container);
+    }
+
+    // Возможно, что здесь методов больше и не понадобится
+    // Разве что на паузу поставить и т.п.
+
+  private:
+    std::string filename;
+    Base::SoundAdapter* adapter;
+    Base::SoundContainer* container;
+  };
+
   class Application
   {
   public:
